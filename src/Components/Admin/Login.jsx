@@ -45,7 +45,7 @@ const Login = observer(() => {
             <br />
             <br />
 
-            <Button onClick={handleLoginClick}>to login</Button>
+            <Button variant="contained" onClick={handleLoginClick}>to login</Button>
 
         </>
     );

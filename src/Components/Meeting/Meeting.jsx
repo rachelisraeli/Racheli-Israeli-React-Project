@@ -2,124 +2,85 @@ import * as React from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useState } from "react";
-import { addMeeting } from '../../store/server';
+import AddMeeting from './AddMeeting';
 
 function Meeting() {
 
-    const [meet, setMeet] = useState({
-        // name: '',
-        // phone: '',
-        // email: '',
-        selectedDateTime: null //GPT
-    });
-
-    // const [name, setName] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [selectedDateTime, setSelectedDateTime] = useState(null);
+    const [meet, setMeet] = useState({});
 
     const handleMeetChange = (event) => {
-        setMeet({ ...meet, [event.target.id]: event.target.value });
-        //GPT // setMeet({ ...meet, name: event.target.value });
+        if (event.target === undefined) {
+            setMeet({ ...meet, dateTime1: event });
+        }
+        else {
+            setMeet({ ...meet, [event.target.name]: event.target.value });
+        }
+        console.log(event)
+        console.log(meet)
     };
-
-    const handleSaveClick = () => {
-        // console.log(addMeeting(selectedDateTime));
-        console.log(addMeeting(meet.selectedDateTime)); //GPT
-    };
-
-    //GPT
-    // const handleSaveClick = async () => {
-    //     const result = await addMeeting(meet);
-    //     if (result === 'success') {
-    //         console.log("Meeting added successfully!");
-    //         // נקרא לפונקציה שתעדכן את הרשימה
-    //         await getMeetings();
-    //     } else {
-    //         console.log("Failed to add meeting.");
-    //     }
-    // };
-
-    //GPT
-    // const handleSaveClick = () => {
-    //     console.log(addMeeting(meet.selectedDateTime));
-    // };
-
-    // const handleNameChange = (event) => {
-    //     setName(event.target.value);
-    // };
-
-    // const handlePhoneChange = (event) => {
-    //     setPhone(event.target.value);
-    // };
-
-    // const handleEmailChange = (event) => {
-    //     setEmail(event.target.value);
-    // };
-
-    // const handleDateTimeChange = (date) => {
-    //     setSelectedDateTime(date);
-    // };
 
     return (
         <>
             <form>
                 <label>
+                    להוסיף בחירה של סוג פגישה   serviceType
+                    <br />
+                    הוא מכניס פגישה גם אם אין את כל הערכים
+                    <br />
+                    <br />
                     <TextField
                         required
                         type='text'
-                        id="outlined-required"
+                        // id="outlined-required"
+                        id='name'
                         name='name'
                         label="Name"
                         value={meet.name}
                         onChange={handleMeetChange}
-                    // value={name}
-                    // onChange={handleNameChange}
                     />
                     <br />
                     <br />
                     <TextField
                         required
                         type='tel'
-                        id="outlined-required"
+                        // id="outlined-required"
+                        id='phone'
                         name='phone'
                         label="Phone"
                         value={meet.phone}
                         onChange={handleMeetChange}
-                    // value={phone}
-                    // onChange={handlePhoneChange}
                     />
-                    &nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <TextField
                         type='email'
-                        id="outlined-required"
+                        // id="outlined-required"
+                        id='email'
                         name='email'
                         label="E-Mail"
                         value={meet.email}
                         onChange={handleMeetChange}
-                    // value={email}
-                    // onChange={handleEmailChange}
                     />
                     <br />
                     <br />
                 </label>
-            </form>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
-                    name='selectedDateTime'
-                    value={meet.selectedDateTime}
-                    onChange={(date) => setMeet({ ...meet, selectedDateTime: date })} //GPT
-                // onChange={handleMeetChange}
 
-                // value={selectedDateTime}
-                // onChange={handleDateTimeChange}
-                />
-            </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                        id="dateTime1"
+                        name='selectedDateTime'
+                        // value={meet.selectedDateTime}
+                        value={meet.dateTime1}
+                        onChange={handleMeetChange}
+                    />
+                </LocalizationProvider>
+            </form>
             <br />
             <br />
-            <Button onClick={handleSaveClick}>Save</Button>
+            <AddMeeting meet={meet} />
+            {/* <AddMeeting meet="meet" /> */}
+            {/* <Button onClick={handleSaveClick}>Save</Button> */}
         </>
     );
 }

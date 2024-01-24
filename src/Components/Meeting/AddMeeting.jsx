@@ -1,25 +1,31 @@
-import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
+import { Button } from '@mui/material';
 import { observer } from 'mobx-react';
 import { addMeeting } from '../../store/server.js';
 
-const AddMeeting = (observer(() => {
+const AddMeeting = (observer((props) => {
 
-    const [meeting, setMeeting] = useState({});
+    // const [meeting, setMeeting] = useState({});
 
-    const handleMeetingChange = (event) => {
-        setMeeting({...meeting,[event.target.id]:event.target.value});
+    // const handleMeetingChange = (event) => {
+    //     setMeeting({ ...meeting, [event.target.id]: event.target.value });
+    // };
+
+    const handleAddClick = () => {
+        addMeeting(props.meet);
     };
 
+    // const handleSaveClick = () => {
+    //     addMeeting(props.meet);
+    // };
+
+    // const handleSaveClick = () => {
+    //     addMeeting(meet);
+    // };
+    
     return (
         <>
-            {/* <TextField id="name" label="meetingName" variant="outlined" value={meeting.name} onChange={(e) => handleMeetingChange(e)} />
-            <TextField id="phone" label="meetingName" variant="outlined" value={meeting.phone} onChange={(e) => handleMeetingChange(e)} />
-            <TextField id="email" label="meetingName" variant="outlined" value={meeting.email} onChange={(e) => handleMeetingChange(e)} />
-            <TextField id="selectedDateTime" label="meetingName" variant="outlined" value={meeting.selectedDateTime} onChange={(e) => handleMeetingChange(e)} /> */}
-            <br />
-            <br />
-            <Button variant="contained" onClick={() => addMeeting(meeting)}>Add Meeting</Button>
+            <Button variant="contained" onClick={handleAddClick}>Add Meeting</Button>
+            {/* <Button variant="contained" onClick={() => addMeeting(meeting)}>Add Meeting</Button> */}
         </>
     )
 }))

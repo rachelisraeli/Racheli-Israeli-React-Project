@@ -23,7 +23,9 @@ export async function getMeetings() {
 }
 
 export async function addMeeting(meeting) {
-    const res = await axios.post('http://localhost:8787/appointments', meeting);
+    console.log(meeting)
+    const res = await axios.post('http://localhost:8787/appointment', {meeting});
+    // const res = await axios.post('http://localhost:8787/appointment', meeting);
     if (res.status === 200) {
         dataStore.addMeeting(meeting);
         return 'success';

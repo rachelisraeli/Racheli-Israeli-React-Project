@@ -1,6 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
 
-
 class DataStore {
 
     services = [];
@@ -14,6 +13,9 @@ class DataStore {
             services: observable,
             setServices: action,
             addService: action,
+            meetings: observable,
+            setMeetings: action,
+            addMeeting: action,
         })
     }
 

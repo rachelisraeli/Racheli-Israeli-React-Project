@@ -4,13 +4,13 @@ import ServiceList from '../Services/ServicesList'
 function UserHome() {
 
     return (
-        <>
+        <div style={{backgroundColor:'green'}}>
             LOGO
-            <BusinessData />
+            <BusinessData isAdmin={false}/>
             <br />
             <br />
             <ServiceList />
-        </>
+        </div>
     )
 }
 

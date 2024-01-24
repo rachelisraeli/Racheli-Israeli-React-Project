@@ -8,7 +8,7 @@ function AdminHome() {
 
     const [isMeetingsOpen, setIsMeetingsOpen] = useState(false);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
-    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+    // const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
     // const handleEditDialogOpen = () => {
     //     setIsEditDialogOpen(true);
@@ -29,8 +29,9 @@ function AdminHome() {
     };
 
     return (
-        <>
-            <BusinessData isEditDialogOpen={isEditDialogOpen} />
+        <div style={{backgroundColor: 'red'}}>
+            {/* <BusinessData isEditDialogOpen={isEditDialogOpen} /> */}
+            <BusinessData isAdmin={true} />
 
             {/* <BusinessData isEditDialogOpen={isEditDialogOpen} onEditDialogOpen={handleEditDialogOpen} /> */}
 
@@ -50,7 +51,7 @@ function AdminHome() {
             {isServicesOpen ? <ServiceList /> : <ServiceList />} */}
             <br />
             <br />
-        </>
+        </div>
     )
 }
 

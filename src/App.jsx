@@ -23,31 +23,31 @@ function App() {
       Meeting
       <br />
       <br />
-      <Meeting />
+      {/* <Meeting /> */}
       <br />
       <br />
-      <MeetingsList />
+      {/* <MeetingsList /> */}
       <br />
       <br />
       Service
       <br />
       <br />
-      <Service />
+      {/* <Service /> */}
       <br />
       <br />
-      <AddService />
+      {/* <AddService /> */}
       <br />
       <br />
-      <ServiceList />
+      {/* <ServiceList /> */}
       <br />
       <br />
       פרטי העסק
       <br />
       <br />
-      <BusinessData />
+      {/* <BusinessData /> */}
       <br />
       <br />
-      <BusinessDisplay />
+      {/* <BusinessDisplay /> */}
       <AdminHome />
       <br />
       <br />

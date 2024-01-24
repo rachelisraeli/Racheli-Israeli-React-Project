@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import businessStore from '../../store/BusinessStore';
+import BusinessData from './BusinessData';
 
 function EditBusinessData({ onUpdateBusiness }) {
 
@@ -36,6 +37,7 @@ function EditBusinessData({ onUpdateBusiness }) {
     };
 
     const handleUpdate = () => {
+        console.log("editedBusiness " + editedBusiness.name)
         businessStore.updateDetails(
             editedBusiness.name,
             editedBusiness.address,
@@ -43,6 +45,7 @@ function EditBusinessData({ onUpdateBusiness }) {
             editedBusiness.owner,
             editedBusiness.description
         );
+        <BusinessData editedBusiness='editedBusiness' />
         // onUpdateBusiness(editedBusiness);
         handleClose();
     };

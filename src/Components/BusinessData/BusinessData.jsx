@@ -1,8 +1,18 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EditBusinessData from './EditBusinessData';
 
-function BusinessData({ isEditDialogOpen, onEditDialogOpen }) {
+function BusinessData({ editedBusiness, onEditDialogOpen, isAdmin }) {
+
+    console.log('isAdmin' + isAdmin)
+
+    // const n = {
+    //     name: "Coding Academy",
+    //     address: "Rothschild 60 Tel Aviv",
+    //     phone: "03-1234567",
+    //     owner: "Yariv Katz",
+    //     description: "The best coding academy in the world",
+    // }
 
     const [business, setBusiness] = useState({
         name: "Coding Academy",
@@ -12,22 +22,18 @@ function BusinessData({ isEditDialogOpen, onEditDialogOpen }) {
         description: "The best coding academy in the world",
     });
 
+    // useEffect(() => {
+    //     business.name = editedBusiness.name;
+    // }, [business.name])
+
     const handleClickOpen = () => {
         onEditDialogOpen(true);
     };
 
-    // const business = {
-    //     name: "Coding Academy",
-    //     address: "Rothschild 60 Tel Aviv",
-    //     phone: "03-1234567",
-    //     owner: "Yariv Katz",
-    //     // logo: "https://coding-academy.org/images/ca_logo.png",
-    //     description: "The best coding academy in the world",
-    // };
-
     return (
         <>
-            {isEditDialogOpen && <EditBusinessData business={business} onUpdateBusiness={setBusiness} />}
+            {/* {isEditDialogOpen && <EditBusinessData business={business} onUpdateBusiness={setBusiness} />} */}
+            {isAdmin && <EditBusinessData business={business} onUpdateBusiness={setBusiness} />}
 
             {/* <EditBusinessData business={business} onUpdateBusiness={setBusiness} /> */}
 

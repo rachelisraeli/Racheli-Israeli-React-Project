@@ -29,7 +29,7 @@ function AdminHome() {
     };
 
     return (
-        <div style={{backgroundColor: 'red'}}>
+        <div style={{ backgroundColor: 'purple' }}>
             {/* <BusinessData isEditDialogOpen={isEditDialogOpen} /> */}
             <BusinessData isAdmin={true} />
 
@@ -45,8 +45,10 @@ function AdminHome() {
             <Button variant="contained" onClick={handleServicesOpen}>
                 Services
             </Button>
+
             {isMeetingsOpen ? <MeetingsList /> : null}
-            {isServicesOpen ? <ServiceList /> : null}
+            {isServicesOpen ? <ServiceList isAdmin={true} /> : null}
+
             {/* {isMeetingsOpen ? <MeetingsList /> : <ServiceList />}
             {isServicesOpen ? <ServiceList /> : <ServiceList />} */}
             <br />

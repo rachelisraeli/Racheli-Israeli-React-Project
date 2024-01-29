@@ -5,6 +5,7 @@ class DataStore {
     services = [];
     meetings = [];
     isLogin = false;
+    business = {};
 
     constructor() {
         makeObservable(this, {
@@ -16,6 +17,8 @@ class DataStore {
             meetings: observable,
             setMeetings: action,
             addMeeting: action,
+            business: observable,
+            editedBusiness: action,
         })
     }
 
@@ -36,8 +39,15 @@ class DataStore {
     }
 
     addMeeting = (meeting) => {
+        console.log("addMeeting", meeting);
         this.meetings = [...this.meetings, meeting];
     }
+
+    editedBusiness = (business) => {
+        this.business = business;
+        return { ...this.business, business };
+    }
+
 }
 
 export default new DataStore();

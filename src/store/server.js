@@ -23,8 +23,10 @@ export async function getMeetings() {
 }
 
 export async function addMeeting(meeting) {
-    console.log(meeting)
-    const res = await axios.post('http://localhost:8787/appointment', {meeting});
+    console.log("addMeetingServer", meeting)
+    // meeting.dateTime1 = meeting.dateTime1.format('YYYY-MM-DDTHH:mm:ss');
+    meeting.dateTime1 = meeting.dateTime1.format('YYYY-MM-DDTHH:mm:ss.sssZ');
+    const res = await axios.post('http://localhost:8787/appointment', meeting);
     // const res = await axios.post('http://localhost:8787/appointment', meeting);
     if (res.status === 200) {
         dataStore.addMeeting(meeting);
@@ -41,7 +43,6 @@ export async function CheckLogin(name, password) {
         const isValid = await axios.post("http://localhost:8787/login", { name, password });
         if (isValid.status === 200) {
             dataStore.setIsLogin(true);
-            alert('amazing');
         }
     }
     catch (e) {

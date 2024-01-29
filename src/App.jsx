@@ -1,58 +1,85 @@
-import './App.css'
-import ServiceList from './Components/Services/ServicesList'
-import Login from './Components/Admin/Login'
-import Meeting from './Components/Meeting/Meeting'
-import MeetingsList from './Components/Meeting/MeetingsList'
-import Service from './Components/Services/Service'
-import BusinessData from './Components/BusinessData/BusinessData'
-import AdminHome from './Components/Admin/AdminHome'
-import UserHome from './Components/User/UserHome'
-// import EditBusinessData from './Components/BusinessData/EditBusinessData'
-import BusinessDisplay from './Components/BusinessData/BusinessDisplay'
+import './App.css';
+import ServiceList from './Components/Services/ServicesList';
+import Login from './Components/Admin/Login';
+import Meeting from './Components/Meeting/Meeting';
+import MeetingsList from './Components/Meeting/MeetingsList';
+import Service from './Components/Services/Service';
+import BusinessData from './Components/BusinessData/BusinessData';
+import AdminHome from './Components/Admin/AdminHome';
+import UserHome from './Components/User/UserHome';
+import { Router } from 'react-router-dom';
+import AddService from './Components/Services/AddService';
+import EditBusinessData from './Components/BusinessData/EditBusinessData';
+import BusinessDisplay from './Components/BusinessData/BusinessDisplay';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 
 function App() {
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <UserHome />,
+      // errorElement: 
+    },
+    {
+      path: "/admin",
+      element: <AdminHome />,
+      // element: <Login />,
+      // errorElement: 
+    }
+  ])
+
+
   return (
     <>
+      <RouterProvider router={router} />
+      {/* <Router /> */}
+      {/* <Router />
       Login
       <br />
       <br />
-      {/* <Login /> */}
+      <Login />
       <br />
       <br />
       Meeting
       <br />
       <br />
-      {/* <Meeting /> */}
+      <Meeting />
       <br />
       <br />
-      {/* <MeetingsList /> */}
+      <MeetingsList />
       <br />
       <br />
       Service
       <br />
       <br />
-      {/* <Service /> */}
+      <Service />
       <br />
       <br />
-      {/* <AddService /> */}
+      <AddService />
       <br />
       <br />
-      {/* <ServiceList /> */}
+      <ServiceList />
       <br />
       <br />
       פרטי העסק
       <br />
       <br />
-      {/* <BusinessData /> */}
+  <Login />*/}
+
+      <Login />
       <br />
       <br />
-      {/* <BusinessDisplay /> */}
+      <br />
       <AdminHome />
       <br />
       <br />
       <br />
       <UserHome />
+      <br />
+      <br />
+      <Meeting />
     </>
   )
 }

@@ -24,10 +24,7 @@ export async function getMeetings() {
 
 export async function addMeeting(meeting) {
     console.log("addMeetingServer", meeting)
-    // meeting.dateTime1 = meeting.dateTime1.format('YYYY-MM-DDTHH:mm:ss');
-    meeting.dateTime1 = meeting.dateTime1.format('YYYY-MM-DDTHH:mm:ss.sssZ');
     const res = await axios.post('http://localhost:8787/appointment', meeting);
-    // const res = await axios.post('http://localhost:8787/appointment', meeting);
     if (res.status === 200) {
         dataStore.addMeeting(meeting);
         return 'success';
@@ -36,7 +33,6 @@ export async function addMeeting(meeting) {
         return 'failed';
     }
 }
-
 
 export async function CheckLogin(name, password) {
     try {
@@ -53,4 +49,9 @@ export async function CheckLogin(name, password) {
             alert('server failed');
         }
     }
+
+}
+
+export async function EditDetails(business) {
+
 }

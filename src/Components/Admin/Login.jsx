@@ -6,11 +6,9 @@ import TextField from '@mui/material/TextField';
 import AdminHome from "./AdminHome";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../Color/Color.jsx';
-
+import dataStore from '../../store/store.js';
 
 const Login = observer(() => {
-
-    const [isLogin, setIsLogin] = useState(false);
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -23,14 +21,18 @@ const Login = observer(() => {
         setPassword(event.target.value);
     };
 
-    const handleLoginClick = () => {
-        CheckLogin(userName, password);
+    const handleLoginClick = async () => {
+        await CheckLogin(userName, password);
+        setUserName('');
+        setPassword('');
     };
 
-    const setFalse = () => {
-        userName = '',
-            password = ''
-    }
+    //     const handleLoginClick = () => {
+    //         CheckLogin(userName, password);
+    //         console.log("IsLogin", isLogin)
+    //         setUserName('');
+    //         setPassword('');
+    //     };
 
     return (
         <>
@@ -59,9 +61,8 @@ const Login = observer(() => {
 
                 <Button variant="contained" onClick={handleLoginClick}>to login</Button>
 
-                {console.log(isLogin)}
-                {isLogin && <AdminHome />}
-                {/* {isLogin ? <AdminHome /> : { setFalse }} */}
+                {/* {dataStore.isLogin ? <AdminHome /> : <Login />} */}
+                {dataStore.isLogin ? <AdminHome /> : null}
 
             </ThemeProvider>
         </>
@@ -69,3 +70,4 @@ const Login = observer(() => {
 });
 
 export default Login;
+

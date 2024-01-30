@@ -1,122 +1,129 @@
-import { Button } from '@mui/material';
-import { observer } from 'mobx-react';
-import { addService } from '../../store/server.js';
+import React from 'react';
 import { useState } from 'react';
+import { observer } from 'mobx-react';
+import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { addService } from '../../store/server.js';
 
-const AddService = (observer((props) => {
+const AddService = observer((props) => {
+  const [service, setService] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
 
-    const handleClickOpen = () => {
-        setButtonOpen({ service: props.service });
-    };
+  const handleClose = () => {
+    props.setButtonOpen(false);
+  };
 
-    const handleClose = () => {
-        props.setButtonOpen(false);
-    };
+  const handleServiceChange = (event) => {
+    const newService = { ...service, [event.target.name]: event.target.value };
+    setService(newService);
+  };
 
-    const [service, setService] = useState({});
+  const validateForm = () => {
+    const requiredFields = ['id', 'name', 'description', 'price'];
+    const isValid = requiredFields.every(field => service[field] !== undefined && service[field] !== '');
 
-    const handleServiceChange = (event) => {
-        setService({ ...service, [event.target.name]: event.target.value });
-        console.log(event)
-        console.log(service)
-    };
+    setIsFormValid(isValid);
+  };
 
-    const handleSaveClick = () => {
-        addService(props.service);
-    };
+  const handleSaveClick = () => {
+    addService(service);
+    setService({});
+    handleClose();
+  };
 
-    return (
-        <>
-            <br />
-            <br />
-            {/* <Button variant="contained" onClick={handleSaveClick}>Add Service</Button> */}
-            <Dialog open={props.buttonOpen} onClose={handleClose}>
-                <DialogTitle>ADD SERVICE</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="id"
-                        name="id"
-                        label="id"
-                        type="number"
-                        fullWidth
-                        variant="standard"
-                        value={service.id || ''}
-                        onChange={handleServiceChange}
-                    />
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="name"
-                        name="name"
-                        label="name"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={service.name || ''}
-                        onChange={handleServiceChange}
-                    />
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="description"
-                        name="description"
-                        label="description"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={service.description || ''}
-                        onChange={handleServiceChange}
-                    />
-                    <br />
-                    <br />
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="price"
-                        name="price"
-                        label="price"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={service.price || ''}
-                        onChange={handleServiceChange}
-                    />
-                    <br />
-                    <br />
-                    <TextField
-                        autoFocus
-                        required
-                        margin="dense"
-                        id="duration"
-                        name="duration"
-                        label="duration"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={service.duration || ''}
-                        onChange={handleServiceChange}
-                    />
-                    <br />
-                    <br />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSaveClick}>Add</Button>
-                </DialogActions>
-            </Dialog>
-        </>
-    )
-}))
+  return (
+    <>
+      <br />
+      <br />
+      <Dialog open={props.buttonOpen} onClose={handleClose}>
+        <DialogTitle>ADD SERVICE</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="id"
+            name="id"
+            label="id"
+            type="number"
+            fullWidth
+            variant="standard"
+            value={service.id || ''}
+            onChange={handleServiceChange}
+            onBlur={validateForm}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="name"
+            label="name"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={service.name || ''}
+            onChange={handleServiceChange}
+            onBlur={validateForm}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="description"
+            name="description"
+            label="description"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={service.description || ''}
+            onChange={handleServiceChange}
+            onBlur={validateForm}
+          />
+          <br />
+          <br />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="price"
+            name="price"
+            label="price"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={service.price || ''}
+            onChange={handleServiceChange}
+            onBlur={validateForm}
+          />
+          <br />
+          <br />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="duration"
+            name="duration"
+            label="duration"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={service.duration || ''}
+            onChange={handleServiceChange}
+          />
+          <br />
+          <br />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSaveClick} disabled={!isFormValid}>Add</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+});
 
-export default AddService
+export default AddService;

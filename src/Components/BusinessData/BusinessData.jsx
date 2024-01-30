@@ -1,28 +1,40 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { observer } from 'mobx-react';
 import EditBusinessData from './EditBusinessData';
+import businessStore from '../../store/BusinessStore.js'
 
-// function BusinessData({ editedBusiness, onEditDialogOpen, isAdmin }) {
-function BusinessData({ isAdmin }) {
+const BusinessData = (observer(({ isAdmin }) => {
+    // function BusinessData({ isAdmin }) {
 
     console.log('isAdmin' + isAdmin)
 
     const [business, setBusiness] = useState({
-        name: "Coding Academy",
-        address: "Rothschild 60 Tel Aviv",
-        phone: "03-1234567",
-        owner: "Yariv Katz",
-        description: "The best coding academy in the world",
+        name: businessStore.name || "Coding Academy",
+        address: businessStore.address || "Rothschild 60 Tel Aviv",
+        phone: businessStore.phone || "03-1234567",
+        owner: businessStore.owner || "Yariv Katz",
+        description: businessStore.description || "The best coding academy in the world",
     });
+
+    // const [business, setBusiness] = useState({
+    //     name: "Coding Academy",
+    //     address: "Rothschild 60 Tel Aviv",
+    //     phone: "03-1234567",
+    //     owner: "Yariv Katz",
+    //     description: "The best coding academy in the world",
+    // });
+
+    // const [name, setName]=
 
     const handleUpdateBusiness = (editedBusiness) => {
         console.log("BusinessData", editedBusiness)
         setBusiness(editedBusiness);
     };
 
-    // useEffect(() => {
-    //     business.name = editedBusiness.name;
-    // }, [business.name])
+    useEffect(() => {
+        console.log(business)
+    }, [business])
 
     // const handleClickOpen = () => {
     //     onEditDialogOpen(true);
@@ -30,20 +42,7 @@ function BusinessData({ isAdmin }) {
 
     return (
         <>
-            {/* {isEditDialogOpen && <EditBusinessData business={business} onUpdateBusiness={setBusiness} />} */}
-
-            {/* {isAdmin && <EditBusinessData business={business} onUpdateBusiness={setBusiness} handleUpdateBusiness={handleUpdateBusiness} />} */}
             {isAdmin && <EditBusinessData business={business} handleUpdateBusiness={handleUpdateBusiness} />}
-            {/* {isAdmin && <EditBusinessData business={business} onUpdateBusiness={handleUpdateBusiness} /> */}
-
-            {/* <EditBusinessData business={business} onUpdateBusiness={setBusiness} /> */}
-
-            {/* <EditBusinessData /> */}
-
-            {/* <Button variant="contained" onClick={handleClickOpen}>Edit details</Button>
-            {isEditDialogOpen && <EditBusinessData />} */}
-
-            {/* {isEditDialogOpen && <EditBusinessData onUpdateBusiness={(editedBusiness) => setBusiness(editedBusiness)} />} */}
 
             <div>
                 <h1>{business.name}</h1>
@@ -54,9 +53,8 @@ function BusinessData({ isAdmin }) {
                 <p><strong>Description:</strong> {business.description}</p>
             </div>
 
-
         </>
     )
-}
+}))
 
 export default BusinessData

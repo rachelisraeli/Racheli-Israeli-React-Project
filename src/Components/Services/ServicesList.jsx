@@ -1,49 +1,46 @@
 import { observer } from 'mobx-react';
+import { useEffect } from 'react';
 import dataStore from '../../store/store.js';
-import AddService from './AddService.jsx';
-import AddMeeting from '../Meeting/AddMeeting.jsx';
-import { Button } from '@mui/material';
 import Meeting from '../Meeting/Meeting.jsx';
 import Service from './Service.jsx';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { getServices } from '../../store/server.js';
 
-const ServiceList = (observer(({isAdmin}) => {
+const ServiceList = (observer(({ isAdmin }) => {
 
-    console.log(dataStore.services);
     console.log(isAdmin)
-   
+
+    useEffect(() => {
+        getServices();
+    }, []);
+
     return (
         <>
             <br />
             <br />
             <br />
-            תצוגת רשימת השירותים
-            <br />
-            <br />
-            <br />
             {console.log(dataStore.services)}
             {dataStore.services.map((service, index) => {
-                return <div key={index}>
-                    id: {service.id},&nbsp;&nbsp;
-                    name: {service.name}
-                    <br />
-                    <br />
-                    price: {service.price},&nbsp;&nbsp;
-                    description: {service.description},&nbsp;&nbsp;
-                    duration: {service.duration}
-                    <br />
-                    <br />
-                </div>
+                return <><Card key={index} sx={{ maxWidth: 500 }}>
+                    <CardContent>
+                        <Typography variant="h5" component="div">
+                            Type of service:  {service.name}      </Typography>
+                        <Typography variant="body2">
+                            {service.id}      <br />
+                        </Typography>
+                        <Typography variant="body2">
+                            {service.description}      <br />
+                        </Typography>
+                        <Typography variant="h6">
+                            Price:  {service.price}      <br />
+                        </Typography>
+                    </CardContent>
+                </Card>
+                </>
             })}
             {isAdmin ? <Service /> : <Meeting />}
-            {/* {isAdmin ?
-                <Button variant="contained"> Add new service
-                    <br /><br />
-                    <Service />
-                </Button> :
-                <Button variant="contained"> Add new meeting
-                    <br /><br />
-                    <Meeting />
-                </Button>} */}
         </>
     )
 }))

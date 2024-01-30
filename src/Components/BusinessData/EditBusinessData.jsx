@@ -11,13 +11,8 @@ import theme from '../Color/Color.jsx';
 import { observer } from 'mobx-react';
 
 const EditBusinessData = (observer((props) => {
-    // const EditBusinessData = (observer) => {
-
-    // function EditBusinessData({ business, onUpdateBusiness, handleUpdateBusiness }) {
 
     const [open, setOpen] = useState(false);
-
-    // const { business } = props;
 
     const { business, onUpdateBusiness, handleUpdateBusiness } = props;
 
@@ -55,31 +50,11 @@ const EditBusinessData = (observer((props) => {
         }));
     };
 
-    // const handleUpdate = () => {
-    //     console.log("editedBusiness " + editedBusiness.name)
-    //     businessStore.updateDetails(
-    //         editedBusiness.name,
-    //         editedBusiness.address,
-    //         editedBusiness.phone,
-    //         editedBusiness.owner,
-    //         editedBusiness.description
-    //     );
-    //     <BusinessData editedBusiness='editedBusiness' />
-    //     // onUpdateBusiness(editedBusiness);
-    //     handleClose();
-    // };
-
     const handleUpdate = () => {
         // onUpdateBusiness(editedBusiness);
         handleUpdateBusiness(editedBusiness);
         handleClose();
     };
-
-    // const handleUpdate = () => {
-    //     onUpdateBusiness(editedBusiness);
-    //     handleUpdateBusiness(editedBusiness)
-    //     handleClose();
-    // };
 
     return (
         <>

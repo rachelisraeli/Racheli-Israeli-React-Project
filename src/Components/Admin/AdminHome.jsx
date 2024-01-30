@@ -29,7 +29,7 @@ function AdminHome() {
     };
 
     return (
-        <div style={{ backgroundColor: 'purple' }}>
+        <div>
             {/* <BusinessData isEditDialogOpen={isEditDialogOpen} /> */}
             <BusinessData isAdmin={true} />
 
@@ -49,10 +49,6 @@ function AdminHome() {
             {isMeetingsOpen ? <MeetingsList /> : null}
             {isServicesOpen ? <ServiceList isAdmin={true} /> : null}
 
-            {/* {isMeetingsOpen ? <MeetingsList /> : <ServiceList />}
-            {isServicesOpen ? <ServiceList /> : <ServiceList />} */}
-            <br />
-            <br />
         </div>
     )
 }

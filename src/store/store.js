@@ -1,10 +1,12 @@
 import { makeObservable, observable, action } from "mobx";
+import { getMeetings } from "./server";
 
 class DataStore {
 
     services = [];
     meetings = [];
     isLogin = false;
+    isAddMeeting = false;
     business = {};
 
     constructor() {
@@ -19,6 +21,7 @@ class DataStore {
             addMeeting: action,
             business: observable,
             editedBusiness: action,
+            isAddMeeting: observable,
         })
     }
 
@@ -27,8 +30,12 @@ class DataStore {
     }
 
     setServices = (services) => {
-        this.services = [...this.services, ...services];
+        this.services = [...this.services, services];
     }
+
+    // setServices = (services) => {
+    //     this.services = [...this.services, ...services];
+    // }
 
     addService = (service) => {
         this.services = [...this.services, service];
@@ -41,6 +48,7 @@ class DataStore {
     addMeeting = (meeting) => {
         console.log("addMeeting", meeting);
         this.meetings = [...this.meetings, meeting];
+        this.isAddMeeting = true;
     }
 
     editedBusiness = (business) => {

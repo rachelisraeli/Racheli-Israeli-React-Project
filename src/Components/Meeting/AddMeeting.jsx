@@ -16,51 +16,56 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { addMeeting } from '../../store/server.js';
 
-const AddMeeting = (observer((props) => {
-
-    // const [open, setOpen] = useState(false);
-
-    // const handleClickOpen = () => {
-    //     setOpen({ meet: props.meet });
-    // };
-
-    const handleClose = () => {
-        props.setOpen(false);
-    };
+const AddMeeting = observer((props) => {
 
     const [meeting, setMeeting] = useState({});
-
     const [typeService, setTypeService] = useState('');
+    const [isFormValid, setIsFormValid] = useState(false);
+    // const [updateError, setUpdateError] = useState(false);
 
     const handleChange = (event) => {
         setTypeService(event.target.value);
     };
 
     const handleMeetingChange = (event) => {
-        if (event.target === undefined) {
-            setMeeting({ ...meeting, dateTime: event });
-        }
-        else {
-            setMeeting({ ...meeting, [event.target.name]: event.target.value });
-        }
-        console.log(event)
-        console.log(meeting)
-        // setMeeting({ ...meeting, [event.target.id]: event.target.value });
+        const newMeeting = event.target === undefined
+            ? { ...meeting, dateTime: event }
+            : { ...meeting, [event.target.name]: event.target.value };
+
+        newMeeting.typeService = typeService;
+        setMeeting(newMeeting);
+        validateForm(newMeeting);
     };
 
-    // const handleAddClick = () => {
-    //     console.log(props.meet)
-    //     addMeeting({ ...props.meet });
-    // };
+    //     const handleMeetingChange = (event) => {
+    //         if (event.target === undefined) {
+    //             setMeeting({ ...meeting, dateTime: event });
+    //         }
+    //         else {
+    //             setMeeting({ ...meeting, [event.target.name]: event.target.value });
+    //         }
+    //         console.log(event)
+    //         console.log(meeting)
+    //     };
+
+    const validateForm = (newMeeting) => {
+        const requiredFields = ['name', 'phone', 'email', 'dateTime'];
+        const isValid = requiredFields.every(field => newMeeting[field]);
+        setIsFormValid(isValid);
+    };
+
+    const handleClose = () => {
+        props.setOpen(false);
+    };
 
     const handleUpdate = () => {
-        console.log("handleAddClickmeet", meeting)
-        addMeeting({ meeting });
+        addMeeting(meeting);
+        setMeeting({});
+        handleClose();
     };
 
     return (
         <>
-            {/* <Button variant="contained" onClick={handleAddClick}>Add Meeting</Button> */}
             <div>
                 <Dialog open={props.open} onClose={handleClose}>
                     <DialogTitle>ADD MEETING</DialogTitle>
@@ -70,23 +75,29 @@ const AddMeeting = (observer((props) => {
                             <Select
                                 labelId="demo-simple-select-required-label"
                                 id="demo-simple-select-required-label"
+                                // value={meeting.typeService}
                                 value={typeService}
                                 label="Type Of Service*"
                                 onChange={handleChange}
                             >
-                                <MenuItem value="">
+                                <MenuItem value="סירוק">
                                     <em>סירוק וחפיפת פאה</em>
                                 </MenuItem>
-                                <MenuItem value="">
+                                <MenuItem value="תסרוקת">
                                     <em> תסרוקת לכלה </em>
                                 </MenuItem>
-                                <MenuItem value="">
-                                    <em> קניית ותפירת פאה חדשה</em>
+                                <MenuItem value="תפירה">
+                                    <em> תפירת פאה חדשה</em>
                                 </MenuItem>
-                                {/* <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-    <MenuItem value={30}>Thirty</MenuItem> */}
+                                <MenuItem value="קניה">
+                                    <em> קניית פאה חדשה</em>
+                                </MenuItem>
+                                {/* <MenuItem value={סירוק}>סירוק וחפיפת פאה</MenuItem>
+                                <MenuItem value={תסרוקת}>תסרוקת לכלה</MenuItem>
+                                <MenuItem value={תפירה}> תפירת פאה חדשה</MenuItem>
+                                <MenuItem value={קניה}> קניית פאה חדשה</MenuItem> */}
                             </Select>
+
                         </FormControl>
                         <TextField
                             autoFocus
@@ -127,26 +138,49 @@ const AddMeeting = (observer((props) => {
                             value={meeting.email}
                             onChange={handleMeetingChange}
                         />
+                        {/* {props.failed ? (
+                            <>
+                                <strong>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DateTimePicker
+                                            id="dateTime1"
+                                            name="dateTime1"
+                                            value={meeting.dateTime1}
+                                            onChange={handleMeetingChange}
+                                        />
+                                    </LocalizationProvider>
+                                </strong>
+                                <p style={{ color: 'red' }}>There was an error. Please choose new date and time.</p>
+                            </>
+                        ) : (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    id="dateTime1"
+                                    name="dateTime1"
+                                    value={meeting.dateTime1}
+                                    onChange={handleMeetingChange}
+                                />
+                            </LocalizationProvider>
+                        )} */}
+
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
                                 id="dateTime1"
-                                name='selectedDateTime'
-                                // value={meet.selectedDateTime}
+                                name="dateTime1"
                                 value={meeting.dateTime1}
                                 onChange={handleMeetingChange}
                             />
                         </LocalizationProvider>
+
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
-                        <Button onClick={handleUpdate}>Edit</Button>
+                        <Button onClick={handleUpdate} disabled={!isFormValid}>Add</Button>
                     </DialogActions>
                 </Dialog>
-            </div>
-            {/* <Button variant="contained" onClick={() => addMeeting(props.meet)}>Add Meeting</Button> */}
-            {/* <Button variant="contained" onClick={() => addMeeting(meeting)}>Add Meeting</Button> */}
+            </div >
         </>
-    )
-}))
+    );
+});
 
-export default AddMeeting
+export default AddMeeting;

@@ -10,20 +10,21 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../Color/Color.jsx';
 import { observer } from 'mobx-react';
 import businessStore from '../../store/BusinessStore.js'
+import { EditDetails } from '../../store/server.js';
 
 
 const EditBusinessData = (observer((props) => {
 
     const [open, setOpen] = useState(false);
 
-    const { business, onUpdateBusiness, handleUpdateBusiness } = props;
+    const { business, updateBusinessDetailsInView, handleUpdateBusiness } = props;
 
     const [editedBusiness, setEditedBusiness] = useState({
-        name: business.name,
-        address: business.address,
-        phone: business.phone,
-        owner: business.owner,
-        description: business.description,
+        name: businessStore.details.name,
+        address: businessStore.details.address,
+        phone: businessStore.details.phone,
+        owner: businessStore.details.owner,
+        description: businessStore.details.description,
     });
 
     useEffect(() => {
@@ -44,15 +45,6 @@ const EditBusinessData = (observer((props) => {
         setOpen(false);
     };
 
-    //batya
-    const handleUpdate = (e) => {
-        e.preventDefault();
-        const detailsToUpdate = { name: newName, address: newAddress, mail: newMail, phone: newPhone };
-        businessStore.editDetails(detailsToUpdate);
-        handleClose();
-    };
-
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setEditedBusiness((prevBusiness) => ({
@@ -63,9 +55,23 @@ const EditBusinessData = (observer((props) => {
 
     // const handleUpdate = () => {
     //     // onUpdateBusiness(editedBusiness);
-    //     handleUpdateBusiness(editedBusiness);
+    //     // handleUpdateBusiness(editedBusiness);
+    //     EditDetails(editedBusiness);
     //     handleClose();
     // };
+
+    const handleUpdate = () => {
+        EditDetails(editedBusiness)
+            .then((result) => {
+                if (result === 'success') {
+                    handleUpdateBusiness(editedBusiness);
+                    updateBusinessDetailsInView(editedBusiness);
+                    handleClose();
+                } else {
+                    alert('Failed to update details');
+                }
+            });
+    };
 
     return (
         <>

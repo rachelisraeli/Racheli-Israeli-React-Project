@@ -9,6 +9,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../Color/Color.jsx';
 import { observer } from 'mobx-react';
+import businessStore from '../../store/BusinessStore.js'
+
 
 const EditBusinessData = (observer((props) => {
 
@@ -42,6 +44,15 @@ const EditBusinessData = (observer((props) => {
         setOpen(false);
     };
 
+    //batya
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        const detailsToUpdate = { name: newName, address: newAddress, mail: newMail, phone: newPhone };
+        businessStore.editDetails(detailsToUpdate);
+        handleClose();
+    };
+
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setEditedBusiness((prevBusiness) => ({
@@ -50,11 +61,11 @@ const EditBusinessData = (observer((props) => {
         }));
     };
 
-    const handleUpdate = () => {
-        // onUpdateBusiness(editedBusiness);
-        handleUpdateBusiness(editedBusiness);
-        handleClose();
-    };
+    // const handleUpdate = () => {
+    //     // onUpdateBusiness(editedBusiness);
+    //     handleUpdateBusiness(editedBusiness);
+    //     handleClose();
+    // };
 
     return (
         <>

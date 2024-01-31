@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dataStore from './store.js';
+import businessStore from './BusinessStore.js';
 
 export async function getServices() {
     const services = await axios.get('http://localhost:8787/services');
@@ -52,6 +53,19 @@ export async function CheckLogin(name, password) {
 
 }
 
-export async function EditDetails(business) {
+export async function GetDetails() {
+    const details = await axios.get('http://localhost:8787/businessData');
+    businessStore.editDetails(details);
+}
 
+export async function EditDetails(details) {
+    console.log("addMeetingServer", details)
+    const res = await axios.post('http://localhost:8787/businessData', details);
+    if (res.status === 200) {
+        businessStore.editDetails(details);
+        return 'success';
+    }
+    else {
+        return 'failed';
+    }
 }

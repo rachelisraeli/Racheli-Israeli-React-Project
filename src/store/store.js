@@ -30,11 +30,14 @@ class DataStore {
     }
 
     setServices = (services) => {
-        this.services = [...this.services, services];
+        console.log(services)
+        if (services.length > 0) {
+            this.services = services;
+        }
     }
 
     // setServices = (services) => {
-    //     this.services = [...this.services, ...services];
+    //     this.services = [...this.services, services];
     // }
 
     addService = (service) => {
@@ -42,8 +45,14 @@ class DataStore {
     }
 
     setMeetings = (meetings) => {
-        this.meetings = [...this.meetings, meetings];
+        this.meetings =  meetings;
     }
+
+    // setMeetings = (meetings) => {
+    //     if (meetings.length > 0) {
+    //         this.meetings = [...this.meetings, meetings];
+    //     }
+    // }
 
     addMeeting = (meeting) => {
         console.log("addMeeting", meeting);

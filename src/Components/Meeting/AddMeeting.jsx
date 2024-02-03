@@ -59,9 +59,13 @@ const AddMeeting = observer((props) => {
     };
 
     const handleUpdate = () => {
-        addMeeting(meeting);
-        setMeeting({});
-        handleClose();
+        addMeeting(meeting).then(x => {
+            setMeeting({});
+
+            handleClose();
+        }).catch(x => {
+            setIsFormValid(false)
+        })
     };
 
     return (
@@ -165,6 +169,7 @@ const AddMeeting = observer((props) => {
 
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
+                                // style={{ color: isFormValid ? "red" : "blue" }}
                                 id="dateTime1"
                                 name="dateTime1"
                                 value={meeting.dateTime1}

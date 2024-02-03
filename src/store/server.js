@@ -4,7 +4,7 @@ import businessStore from './BusinessStore.js';
 
 export async function getServices() {
     const services = await axios.get('http://localhost:8787/services');
-    dataStore.setServices(services);
+    dataStore.setServices(services.data);
 }
 
 export async function addService(service) {
@@ -20,7 +20,7 @@ export async function addService(service) {
 
 export async function getMeetings() {
     const meetings = await axios.get('http://localhost:8787/appointments');
-    dataStore.setMeetings(meetings);
+    dataStore.setMeetings(meetings.data);
 }
 
 export async function addMeeting(meeting) {

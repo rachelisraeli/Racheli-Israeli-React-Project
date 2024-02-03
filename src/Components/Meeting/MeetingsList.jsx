@@ -19,6 +19,8 @@ const MeetingsList = (observer(() => {
             {dataStore.meetings.map((meeting, index) => {
                 return <><Card key={index} sx={{ maxWidth: 300 }}>
                     <CardContent>
+                    <Typography variant="h5" component="div">
+                            {meeting.typeService}      </Typography>
                         <Typography variant="h5" component="div">
                             {meeting.name}      </Typography>
                         <Typography variant="body2">
@@ -28,7 +30,7 @@ const MeetingsList = (observer(() => {
                             {meeting.email}      <br />
                         </Typography>
                         <Typography variant="body2">
-                            {meeting.dateTime1}      <br />
+                            {meeting.dateTime}      <br />
                         </Typography>
                     </CardContent>
                 </Card>

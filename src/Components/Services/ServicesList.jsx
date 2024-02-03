@@ -7,13 +7,16 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getServices } from '../../store/server.js';
+import { yellow } from '@mui/material/colors';
 
 const ServiceList = (observer(({ isAdmin }) => {
 
     console.log(isAdmin)
 
     useEffect(() => {
-        getServices();
+        if (!dataStore.services.length) {
+            getServices();
+        }
     }, []);
 
     return (
@@ -27,12 +30,15 @@ const ServiceList = (observer(({ isAdmin }) => {
                     <CardContent>
                         <Typography variant="h5" component="div">
                             Type of service:  {service.name}      </Typography>
+                        <br />
                         <Typography variant="body2">
-                            {service.id}      <br />
+                            Service number:  {service.id}      <br />
                         </Typography>
+                        <br />
                         <Typography variant="body2">
-                            {service.description}      <br />
+                            Service description:  {service.description}      <br />
                         </Typography>
+                        <br />
                         <Typography variant="h6">
                             Price:  {service.price}      <br />
                         </Typography>

@@ -27,9 +27,13 @@ const BusinessData = (observer(({ isAdmin }) => {
         setBusiness(newDetails);
     };
 
+    // useEffect(() => {
+    //     GetDetails();
+    // }, [business])
+
     useEffect(() => {
         GetDetails();
-    }, [business])
+    }, [])
 
 
     // const handleClickOpen = () => {

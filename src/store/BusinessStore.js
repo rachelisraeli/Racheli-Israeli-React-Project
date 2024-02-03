@@ -19,8 +19,22 @@ class BusinessStore {
     }
 
     editDetails(newDetails) {
+        if(Object.keys(newDetails).length){
         this.details = newDetails;
+        }
     }
+
+    // editDetails(newDetails) {
+    //     if (newDetails.name != null && newDetails.address != null && newDetails.phone != null && newDetails.mail != null) {
+    //         this.details = newDetails;
+    //     }
+    // }
+
+    // editDetails(newDetails) {
+    //     this.details = newDetails;
+    // }
+
+
     //GPT===
 
     // constructor(name, address, phone, owner, description) {

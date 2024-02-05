@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material'
+import { Button, colors } from '@mui/material'
+import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import ServiceList from '../Services/ServicesList';
 import BusinessData from '../BusinessData/BusinessData';
 import MeetingsList from '../Meeting/MeetingsList';
+
 
 function AdminHome() {
 
@@ -38,16 +41,26 @@ function AdminHome() {
             {/* <BusinessData /> */}
             <br />
             <br />
-            <Button variant="contained" onClick={handleMeetingsOpen}>
+            {/* <Button variant="contained" onClick={handleMeetingsOpen}>
                 Meetings
             </Button>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <Button variant="contained" onClick={handleServicesOpen}>
                 Services
-            </Button>
+            </Button> */}
 
-            {isMeetingsOpen ? <MeetingsList /> : null}
-            {isServicesOpen ? <ServiceList isAdmin={true} /> : null}
+            {<Button variant="contained">
+                <Link to="./meetings">Meetings</Link>
+            </Button>}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            {<Button variant="contained">
+                <Link to="./services">Services</Link>
+            </Button>}
+
+            {/* {isMeetingsOpen ? <MeetingsList /> : null}
+            {isServicesOpen ? <ServiceList isAdmin={true} /> : null} */}
+
+            <Outlet />
 
         </div>
     )

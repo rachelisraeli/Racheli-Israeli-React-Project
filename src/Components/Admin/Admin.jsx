@@ -10,6 +10,7 @@ const Admin = observer(() => {
 
     <div>
       {dataStore.isLogin ? <AdminHome /> : <Login />}
+
     </div>
 
   );

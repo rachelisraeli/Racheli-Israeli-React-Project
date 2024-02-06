@@ -1,5 +1,4 @@
 import { makeObservable, observable, action } from "mobx";
-import { getMeetings } from "./server";
 
 class DataStore {
 
@@ -36,23 +35,14 @@ class DataStore {
         }
     }
 
-    // setServices = (services) => {
-    //     this.services = [...this.services, services];
-    // }
-
     addService = (service) => {
         this.services = [...this.services, service];
     }
 
     setMeetings = (meetings) => {
-        this.meetings =  meetings;
+        meetings.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
+        this.meetings = meetings;
     }
-
-    // setMeetings = (meetings) => {
-    //     if (meetings.length > 0) {
-    //         this.meetings = [...this.meetings, meetings];
-    //     }
-    // }
 
     addMeeting = (meeting) => {
         console.log("addMeeting", meeting);
@@ -64,7 +54,6 @@ class DataStore {
         this.business = business;
         return { ...this.business, business };
     }
-
 }
 
 export default new DataStore();

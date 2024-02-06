@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { addMeeting } from '../../store/server.js';
+import dataStore from '../../store/store.js';
 
 const AddMeeting = observer((props) => {
 
@@ -43,7 +44,7 @@ const AddMeeting = observer((props) => {
 
     const handleClose = () => {
         props.setOpen(false);
-        props.setOpenAlert(false);//==========
+        props.setOpenAlert(false);
     };
 
     const handleUpdate = () => {
@@ -64,79 +65,37 @@ const AddMeeting = observer((props) => {
                         <FormControl required sx={{ m: 1, minWidth: 224 }}>
                             <InputLabel id="demo-simple-select-required-label">Type Of Service</InputLabel>
                             <Select
-                                labelId="demo-simple-select-required-label"
-                                id="demo-simple-select-required-label"
-                                value={typeService}
-                                label="Type Of Service*"
-                                onChange={handleChange}
+                                // labelId="demo-simple-select-required-label"
+                                // id="demo-simple-select-required-label"
+                                id="typeService" value={typeService} label="Type Of Service*" onChange={handleChange}
                             >
-                                <MenuItem value="סירוק">
-                                    <em>סירוק וחפיפת פאה</em>
-                                </MenuItem>
-                                <MenuItem value="תסרוקת">
-                                    <em> תסרוקת לכלה </em>
-                                </MenuItem>
-                                <MenuItem value="תפירה">
-                                    <em> תפירת פאה חדשה</em>
-                                </MenuItem>
-                                <MenuItem value="קניה">
-                                    <em> קניית פאה חדשה</em>
-                                </MenuItem>
+                                {dataStore.services.map((service, index) => (
+                                    <MenuItem key={index} value={service.name}>
+                                        {service.name}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                         <TextField
-                            autoFocus
-                            required
-                            margin="dense"
-                            id="name"
-                            name="name"
-                            label="name"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            value={meeting.name}
-                            onChange={handleMeetingChange}
+                            margin="dense" id="name" name="name" label="name" type="text" fullWidth variant="standard" value={meeting.name} onChange={handleMeetingChange}
                         />
                         <TextField
-                            autoFocus
-                            required
-                            margin="dense"
-                            id="phone"
-                            name="phone"
-                            label="phone"
-                            type="tel"
-                            fullWidth
-                            variant="standard"
-                            value={meeting.phone}
-                            onChange={handleMeetingChange}
+                            margin="dense" id="phone" name="phone" label="phone" type="tel" fullWidth variant="standard" value={meeting.phone} onChange={handleMeetingChange}
                         />
                         <TextField
-                            autoFocus
-                            required
-                            margin="dense"
-                            id="email"
-                            name="email"
-                            label="email"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            value={meeting.email}
-                            onChange={handleMeetingChange}
+                            margin="dense" id="email" name="email" label="email" type="text" fullWidth variant="standard" value={meeting.email} onChange={handleMeetingChange}
                         />
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
-                                // style={{ color: isFormValid ? "red" : "blue" }}
-                                id="dateTime1"
-                                name="dateTime1"
-                                value={meeting.dateTime1}
-                                onChange={handleMeetingChange}
+                                id="dateTime1" name="dateTime1" value={meeting.dateTime1} onChange={handleMeetingChange}
                             />
                         </LocalizationProvider>
-
                     </DialogContent>
-                    {props.openAlert && !props.failed &&
-                        <Alert severity="error" > It is not possible to make an appointment at this time.<br /> You can try at another time </Alert>}
-                    {/* {!props.failed && <Alert severity="error"> It is not possible to make an appointment at this time.<br /> You can try at another time </Alert>} */}
+                    {dataStore.isAddMeeting ?
+                        alert("The meeting added successfully! See you :) ") :
+                        alert("It is not possible to make an appointment at this time, Please choose other time")}
+                    {/* {props.openAlert && !props.failed &&
+                        <Alert severity="error" > It is not possible to make an appointment at this time.<br /> You can try at another time </Alert>} */}
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
                         <Button onClick={handleUpdate} disabled={!isFormValid}>Add</Button>

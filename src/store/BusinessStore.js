@@ -3,14 +3,13 @@ import { makeObservable, observable, action } from "mobx";
 class BusinessStore {
 
     details = {
-        name: "Coding Academy",
-        address: "Rothschild 60 Tel Aviv",
-        phone: "03-1234567",
-        owner: "Yariv Katz",
-        description: "The best coding academy in the world",
+        name: "CHAYA WIGS",
+        address: "Rashi 60 Elad",
+        phone: "03-9090742",
+        owner: "Chaya Katz",
+        description: "Dream wig design",
     };
 
-    //GPT===
     constructor() {
         makeObservable(this, {
             details: observable,
@@ -19,60 +18,10 @@ class BusinessStore {
     }
 
     editDetails(newDetails) {
-        if(Object.keys(newDetails).length){
-        this.details = newDetails;
+        if (Object.keys(newDetails).length) {
+            this.details = newDetails;
         }
     }
-
-    // editDetails(newDetails) {
-    //     if (newDetails.name != null && newDetails.address != null && newDetails.phone != null && newDetails.mail != null) {
-    //         this.details = newDetails;
-    //     }
-    // }
-
-    // editDetails(newDetails) {
-    //     this.details = newDetails;
-    // }
-
-
-    //GPT===
-
-    // constructor(name, address, phone, owner, description) {
-    //     makeObservable(this, {
-    //         // name: observable,
-    //         // address: observable,
-    //         // phone: observable,
-    //         // owner: observable,
-    //         // description: observable,
-    //         details: observable,
-    //         editDetails: action,
-    //         setDetails: action,
-    //     });
-
-    //     this.name = name;
-    //     this.address = address;
-    //     this.phone = phone;
-    //     this.owner = owner;
-    //     this.description = description;
-    // }
-
-    // editDetails(newName, newAddress, newPhone, newOwner, newDescription) {
-    //     this.name = newName;
-    //     this.address = newAddress;
-    //     this.phone = newPhone;
-    //     this.owner = newOwner;
-    //     this.description = newDescription;
-    // }
-
-    // editDetails = (details) => {
-    //     this.details = details;
-    //     return { ...this.details, details };
-    // }
-
-    // setDetails = (details) => {
-    //     this.details = details;
-    //     return { ...this.details, details };
-    // }
 
 }
 

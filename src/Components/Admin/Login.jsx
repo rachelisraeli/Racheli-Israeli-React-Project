@@ -27,13 +27,6 @@ const Login = observer(() => {
         setPassword('');
     };
 
-    //     const handleLoginClick = () => {
-    //         CheckLogin(userName, password);
-    //         console.log("IsLogin", isLogin)
-    //         setUserName('');
-    //         setPassword('');
-    //     };
-
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -61,7 +54,6 @@ const Login = observer(() => {
 
                 <Button variant="contained" onClick={handleLoginClick}>to login</Button>
 
-                {/* {dataStore.isLogin ? <AdminHome /> : <Login />} */}
                 {dataStore.isLogin ? <AdminHome /> : null}
 
             </ThemeProvider>

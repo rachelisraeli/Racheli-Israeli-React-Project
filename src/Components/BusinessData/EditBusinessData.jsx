@@ -12,13 +12,10 @@ import { observer } from 'mobx-react';
 import businessStore from '../../store/BusinessStore.js'
 import { EditDetails } from '../../store/server.js';
 
-
 const EditBusinessData = (observer((props) => {
 
     const [open, setOpen] = useState(false);
-
     const { business, updateBusinessDetailsInView, handleUpdateBusiness } = props;
-
     const [editedBusiness, setEditedBusiness] = useState({
         name: businessStore.details.name,
         address: businessStore.details.address,
@@ -53,13 +50,6 @@ const EditBusinessData = (observer((props) => {
         }));
     };
 
-    // const handleUpdate = () => {
-    //     // onUpdateBusiness(editedBusiness);
-    //     // handleUpdateBusiness(editedBusiness);
-    //     EditDetails(editedBusiness);
-    //     handleClose();
-    // };
-
     const handleUpdate = () => {
         EditDetails(editedBusiness)
             .then((result) => {
@@ -84,69 +74,20 @@ const EditBusinessData = (observer((props) => {
                         <DialogTitle>Edit details</DialogTitle>
                         <DialogContent>
                             <TextField
-                                autoFocus
-                                required
-                                margin="dense"
-                                id="name"
-                                name="name"
-                                label="Name"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                value={editedBusiness.name}
-                                onChange={handleChange}
+                                margin="dense" id="name" name="name" label="Name" type="text" variant="standard" value={editedBusiness.name} onChange={handleChange}
+                            />
+                                {/* // fullWidth */}
+                            <TextField
+                                margin="dense" id="address" name="address" label="address" type="text" variant="standard" value={editedBusiness.address} onChange={handleChange}
                             />
                             <TextField
-                                autoFocus
-                                required
-                                margin="dense"
-                                id="address"
-                                name="address"
-                                label="address"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                value={editedBusiness.address}
-                                onChange={handleChange}
+                                margin="dense" id="phone" name="phone" label="phone" type="text" variant="standard" value={editedBusiness.phone} onChange={handleChange}
                             />
                             <TextField
-                                autoFocus
-                                required
-                                margin="dense"
-                                id="phone"
-                                name="phone"
-                                label="phone"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                value={editedBusiness.phone}
-                                onChange={handleChange}
+                                margin="dense" id="owner" name="owner" label="owner" type="text" variant="standard" value={editedBusiness.owner} onChange={handleChange}
                             />
                             <TextField
-                                autoFocus
-                                required
-                                margin="dense"
-                                id="owner"
-                                name="owner"
-                                label="owner"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                value={editedBusiness.owner}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                autoFocus
-                                required
-                                margin="dense"
-                                id="description"
-                                name="description"
-                                label="description"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                value={editedBusiness.description}
-                                onChange={handleChange}
+                                margin="dense" id="description" name="description" label="description" type="text" variant="standard" value={editedBusiness.description} onChange={handleChange}
                             />
                         </DialogContent>
                         <DialogActions>

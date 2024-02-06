@@ -25,7 +25,6 @@ const AddService = observer((props) => {
   const validateForm = () => {
     const requiredFields = ['id', 'name', 'description', 'price'];
     const isValid = requiredFields.every(field => service[field] !== undefined && service[field] !== '');
-
     setIsFormValid(isValid);
   };
 
@@ -43,76 +42,23 @@ const AddService = observer((props) => {
         <DialogTitle>ADD SERVICE</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="id"
-            name="id"
-            label="id"
-            type="number"
-            fullWidth
-            variant="standard"
-            value={service.id || ''}
-            onChange={handleServiceChange}
-            onBlur={validateForm}
+            margin="dense" id="id" name="id" label="id" type="number" fullWidth variant="standard" value={service.id || ''} onChange={handleServiceChange} onBlur={validateForm}
           />
           <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="name"
-            label="name"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={service.name || ''}
-            onChange={handleServiceChange}
-            onBlur={validateForm}
+            margin="dense" id="name" name="name" label="name" type="text" fullWidth variant="standard" value={service.name || ''} onChange={handleServiceChange} onBlur={validateForm}
           />
           <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="description"
-            name="description"
-            label="description"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={service.description || ''}
-            onChange={handleServiceChange}
-            onBlur={validateForm}
+            margin="dense" id="description" name="description" label="description" type="text" fullWidth variant="standard" value={service.description || ''} onChange={handleServiceChange} onBlur={validateForm}
           />
           <br />
           <br />
           <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="price"
-            name="price"
-            label="price"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={service.price || ''}
-            onChange={handleServiceChange}
-            onBlur={validateForm}
+            margin="dense" id="price" name="price" label="price" type="text" fullWidth variant="standard" value={service.price || ''} onChange={handleServiceChange} onBlur={validateForm}
           />
           <br />
           <br />
           <TextField
-            autoFocus
-            margin="dense"
-            id="duration"
-            name="duration"
-            label="duration"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={service.duration || ''}
-            onChange={handleServiceChange}
+            margin="dense" id="duration" name="duration" label="duration" type="text" fullWidth variant="standard" value={service.duration || ''} onChange={handleServiceChange}
           />
           <br />
           <br />

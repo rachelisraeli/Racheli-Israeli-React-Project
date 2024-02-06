@@ -7,7 +7,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { getServices } from '../../store/server.js';
-import { yellow } from '@mui/material/colors';
 
 const ServiceList = (observer(({ isAdmin }) => {
 
@@ -31,22 +30,19 @@ const ServiceList = (observer(({ isAdmin }) => {
                         <Typography variant="h5" component="div">
                             Type of service:  {service.name}      </Typography>
                         <br />
-                        <Typography variant="body2">
-                            Service number:  {service.id}      <br />
-                        </Typography>
-                        <br />
-                        <Typography variant="body2">
-                            Service description:  {service.description}      <br />
+                        <Typography variant="h6">
+                            {service.description}      <br />
                         </Typography>
                         <br />
                         <Typography variant="h6">
                             Price:  {service.price}      <br />
                         </Typography>
+                        {isAdmin ? null : <><br /> <br /><Meeting /></>}
                     </CardContent>
                 </Card>
                 </>
             })}
-            {isAdmin ? <Service /> : <Meeting />}
+            {isAdmin ? <Service /> : null}
         </>
     )
 }))

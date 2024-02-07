@@ -33,30 +33,20 @@ const MeetingsList = (observer(() => {
             <ThemeProvider theme={theme}>
                 {dataStore.meetings.map((meeting, index) => {
                     const meetingDate = new Date(meeting.dateTime);
-                    let backgroundColor = 'green'; // ירוק לפגישות בעתיד
-
+                    let backgroundColor = 'green';
                     if (isToday(meetingDate)) {
-                        backgroundColor = 'red'; // אדום לפגישות ביום הנוכחי
+                        backgroundColor = 'red';
                     } else if (isThisWeek(meetingDate)) {
-                        backgroundColor = 'orange'; // כתום לפגישות במהלך השבוע
+                        backgroundColor = 'orange';
                     }
-
                     return <><Card key={index} sx={{ maxWidth: 300 }}>
                         <CardContent>
-                            <Typography variant="h5" component="div">
-                                {meeting.typeService}      </Typography>
-                            <Typography variant="h5" component="div">
-                                {meeting.name}      </Typography>
-                            <Typography variant="body2">
-                                {meeting.phone}      <br />
+                            <Typography variant="h5" component="div"> {meeting.typeService} </Typography>
+                            <Typography variant="h5" component="div"> {meeting.name} </Typography>
+                            <Typography variant="body2"> {meeting.phone} <br /> </Typography>
+                            <Typography variant="body2"> {meeting.email} <br />
                             </Typography>
-                            <Typography variant="body2">
-                                {meeting.email}      <br />
-                            </Typography>
-                            <Typography variant="body2" backgroundColor={backgroundColor}>
-                                <div >{getTime(meeting.dateTime)}</div>
-                                {/* {meeting.dateTime}      <br /> */}
-                            </Typography>
+                            <Typography variant="body2" backgroundColor={backgroundColor}> <div >{getTime(meeting.dateTime)}</div> </Typography>
                         </CardContent>
                     </Card>
                     </>

@@ -18,11 +18,9 @@ import { addMeeting } from '../../store/server.js';
 import dataStore from '../../store/store.js';
 
 const AddMeeting = observer((props) => {
-
     const [meeting, setMeeting] = useState({});
     const [typeService, setTypeService] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
-    // const [click, setClick] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
 
     const handleChange = (event) => {
@@ -49,15 +47,25 @@ const AddMeeting = observer((props) => {
     };
 
     const handleUpdate = () => {
-        addMeeting(meeting).then(x => {
-            setMeeting({});
-            handleClose();
-            dataStore.isAddMeeting = true;//========
-            setClick(true);
-        }).catch(() => {
-            setIsFormValid(false);
-            dataStore.isAddMeeting = false;//=======
-        });
+        addMeeting(meeting)
+            .then(() => {
+                setMeeting({});
+                setTypeService('');
+                dataStore.isAddMeeting = true;
+                setOpenAlert(true);
+                setTimeout(() => {
+                    setOpenAlert(false);
+                    handleClose();
+                }, 3000);
+            })
+            .catch(() => {
+                setIsFormValid(false);
+                dataStore.isAddMeeting = false;
+                setOpenAlert(true);
+                setTimeout(() => {
+                    setOpenAlert(false);
+                }, 3000);
+            });
     };
 
     return (
@@ -68,9 +76,7 @@ const AddMeeting = observer((props) => {
                     <DialogContent>
                         <FormControl required sx={{ m: 1, minWidth: 224 }}>
                             <InputLabel id="demo-simple-select-required-label">Type Of Service</InputLabel>
-                            <Select
-                                id="typeService" value={typeService} label="Type Of Service*" onChange={handleChange}
-                            >
+                            <Select id="typeService" value={typeService} label="Type Of Service*" onChange={handleChange}>
                                 {dataStore.services.map((service, index) => (
                                     <MenuItem key={index} value={service.name}>
                                         {service.name}
@@ -78,38 +84,19 @@ const AddMeeting = observer((props) => {
                                 ))}
                             </Select>
                         </FormControl>
-                        <TextField
-                            margin="dense" id="name" name="name" label="name" type="text" fullWidth variant="standard" value={meeting.name} onChange={handleMeetingChange}
-                        />
-                        <TextField
-                            margin="dense" id="phone" name="phone" label="phone" type="tel" fullWidth variant="standard" value={meeting.phone} onChange={handleMeetingChange}
-                        />
-                        <TextField
-                            margin="dense" id="email" name="email" label="email" type="text" fullWidth variant="standard" value={meeting.email} onChange={handleMeetingChange}
-                        />
+                        <TextField margin="dense" id="name" name="name" label="name" type="text" fullWidth variant="standard" value={meeting.name} onChange={handleMeetingChange} />
+                        <TextField margin="dense" id="phone" name="phone" label="phone" type="tel" fullWidth variant="standard" value={meeting.phone} onChange={handleMeetingChange} />
+                        <TextField margin="dense" id="email" name="email" label="email" type="text" fullWidth variant="standard" value={meeting.email} onChange={handleMeetingChange} />
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateTimePicker
-                                id="dateTime1" name="dateTime1" value={meeting.dateTime1} onChange={handleMeetingChange}
-                            />
+                            <DateTimePicker id="dateTime1" className={`${dataStore.isAddMeeting === false && 'redBorder'}`} name="dateTime1" value={meeting.dateTime1} onChange={handleMeetingChange} />
                         </LocalizationProvider>
                     </DialogContent>
-                    {/* {dataStore.isAddMeeting && click &&
-                        alert("The meeting added successfully! See you :) ")}
-                    {!dataStore.isAddMeeting && click &&
-                        alert("It is not possible to make an appointment at this time, Please choose other time")} */}
-
-                    {/* {click && !dataStore.isAddMeeting && <Alert severity="error" onClose={() => { setClick(false) }}>לא ניתן לקבוע פגישה במועד זה. ניתן לנסות במועד אחר</Alert>}
-                    {click && dataStore.isAddMeeting && <Alert severity="success" onClose={() => { setClick(false) }}>הפגישה נקבעה בהצלחה</Alert>} */}
-
-                    {dataStore.isAddMeeting && openAlert ?
-                        alert("The meeting added successfully! See you :) ") :
-                        alert("It is not possible to make an appointment at this time, Please choose other time")}
-
-                    {/* {dataStore.isAddMeeting &&
-                        <Alert severity="success" onClose={() => dataStore.isAddMeeting = false}> The meeting added successfully! &nbsp;&nbsp;&nbsp; See you :) </Alert>}
-                    {!dataStore.isAddMeeting &&
-                        <Alert severity='error' onClose={() => dataStore.isAddMeeting = false}>It is not possible to make an appointment at this time, Please choose other time</Alert>} */}
-                        
+                    {dataStore.isAddMeeting && openAlert && (
+                        <Alert severity="success" onClose={() => setOpenAlert(false)}> The meeting added successfully! See you :) </Alert>
+                    )}
+                    {!dataStore.isAddMeeting && openAlert && (
+                        <Alert severity="error" onClose={() => setOpenAlert(false)}> It is not possible to make an appointment at this time, Please choose other time</Alert>
+                    )}
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
                         <Button onClick={handleUpdate} disabled={!isFormValid}>Add</Button>

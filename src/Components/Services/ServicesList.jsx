@@ -28,14 +28,15 @@ const ServiceList = (observer(({ isAdmin }) => {
                 return <><Card key={index} sx={{ maxWidth: 500 }}>
                     <CardContent>
                         <Typography variant="h5" component="div">
-                            Type of service:  {service.name}      </Typography>
-                        <br />
-                        <Typography variant="h6">
-                            {service.description}      <br />
+                            Type of service:  {service.name}
                         </Typography>
                         <br />
                         <Typography variant="h6">
-                            Price:  {service.price}      <br />
+                            {service.description} <br />
+                        </Typography>
+                        <br />
+                        <Typography variant="h6">
+                            Price:  {service.price} <br />
                         </Typography>
                         {isAdmin ? null : <><br /> <br /><Meeting /></>}
                     </CardContent>

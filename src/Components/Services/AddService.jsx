@@ -41,27 +41,11 @@ const AddService = observer((props) => {
       <Dialog open={props.buttonOpen} onClose={handleClose}>
         <DialogTitle>ADD SERVICE</DialogTitle>
         <DialogContent>
-          <TextField
-            margin="dense" id="id" name="id" label="id" type="number" fullWidth variant="standard" value={service.id || ''} onChange={handleServiceChange} onBlur={validateForm}
-          />
-          <TextField
-            margin="dense" id="name" name="name" label="name" type="text" fullWidth variant="standard" value={service.name || ''} onChange={handleServiceChange} onBlur={validateForm}
-          />
-          <TextField
-            margin="dense" id="description" name="description" label="description" type="text" fullWidth variant="standard" value={service.description || ''} onChange={handleServiceChange} onBlur={validateForm}
-          />
-          <br />
-          <br />
-          <TextField
-            margin="dense" id="price" name="price" label="price" type="text" fullWidth variant="standard" value={service.price || ''} onChange={handleServiceChange} onBlur={validateForm}
-          />
-          <br />
-          <br />
-          <TextField
-            margin="dense" id="duration" name="duration" label="duration" type="text" fullWidth variant="standard" value={service.duration || ''} onChange={handleServiceChange}
-          />
-          <br />
-          <br />
+          <TextField margin="dense" id="id" name="id" label="id" type="number" fullWidth variant="standard" value={service.id || ''} onChange={handleServiceChange} onBlur={validateForm} />
+          <TextField margin="dense" id="name" name="name" label="name" type="text" fullWidth variant="standard" value={service.name || ''} onChange={handleServiceChange} onBlur={validateForm} />
+          <TextField margin="dense" id="description" name="description" label="description" type="text" fullWidth variant="standard" value={service.description || ''} onChange={handleServiceChange} onBlur={validateForm} />
+          <TextField margin="dense" id="price" name="price" label="price" type="text" fullWidth variant="standard" value={service.price || ''} onChange={handleServiceChange} onBlur={validateForm} />
+          <TextField margin="dense" id="duration" name="duration" label="duration" type="text" fullWidth variant="standard" value={service.duration || ''} onChange={handleServiceChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

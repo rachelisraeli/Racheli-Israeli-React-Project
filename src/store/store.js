@@ -5,7 +5,7 @@ class DataStore {
     services = [];
     meetings = [];
     isLogin = false;
-    isAddMeeting = false;
+    isAddMeeting = '';
     business = {};
 
     constructor() {

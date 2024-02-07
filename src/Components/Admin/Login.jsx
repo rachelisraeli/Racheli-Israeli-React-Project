@@ -36,26 +36,16 @@ const Login = observer(() => {
                     label="User Name"
                     value={userName}
                     onChange={handleUserNameChange}
-                />
-
-                <br />
-                <br />
-
+                /> <br /> <br />
                 <TextField
                     type="password"
                     id="password"
                     label="Password"
                     value={password}
                     onChange={handlePasswordChange}
-                />
-
-                <br />
-                <br />
-
+                /> <br /> <br />
                 <Button variant="contained" onClick={handleLoginClick}>to login</Button>
-
                 {dataStore.isLogin ? <AdminHome /> : null}
-
             </ThemeProvider>
         </>
     );

@@ -13,7 +13,6 @@ import businessStore from '../../store/BusinessStore.js'
 import { EditDetails } from '../../store/server.js';
 
 const EditBusinessData = (observer((props) => {
-
     const [open, setOpen] = useState(false);
     const { business, updateBusinessDetailsInView, handleUpdateBusiness } = props;
     const [editedBusiness, setEditedBusiness] = useState({
@@ -67,28 +66,15 @@ const EditBusinessData = (observer((props) => {
         <>
             <ThemeProvider theme={theme}>
                 <div>
-                    <Button variant="contained" onClick={handleClickOpen}>
-                        Edit details
-                    </Button>
+                    <Button variant="contained" onClick={handleClickOpen}> Edit details </Button>
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>Edit details</DialogTitle>
                         <DialogContent>
-                            <TextField
-                                margin="dense" id="name" name="name" label="Name" type="text" variant="standard" value={editedBusiness.name} onChange={handleChange}
-                            />
-                                {/* // fullWidth */}
-                            <TextField
-                                margin="dense" id="address" name="address" label="address" type="text" variant="standard" value={editedBusiness.address} onChange={handleChange}
-                            />
-                            <TextField
-                                margin="dense" id="phone" name="phone" label="phone" type="text" variant="standard" value={editedBusiness.phone} onChange={handleChange}
-                            />
-                            <TextField
-                                margin="dense" id="owner" name="owner" label="owner" type="text" variant="standard" value={editedBusiness.owner} onChange={handleChange}
-                            />
-                            <TextField
-                                margin="dense" id="description" name="description" label="description" type="text" variant="standard" value={editedBusiness.description} onChange={handleChange}
-                            />
+                            <TextField margin="dense" id="name" name="name" label="Name" type="text" variant="standard" value={editedBusiness.name} onChange={handleChange} />
+                            <TextField margin="dense" id="address" name="address" label="address" type="text" variant="standard" value={editedBusiness.address} onChange={handleChange} />
+                            <TextField margin="dense" id="phone" name="phone" label="phone" type="text" variant="standard" value={editedBusiness.phone} onChange={handleChange} />
+                            <TextField margin="dense" id="owner" name="owner" label="owner" type="text" variant="standard" value={editedBusiness.owner} onChange={handleChange} />
+                            <TextField margin="dense" id="description" name="description" label="description" type="text" variant="standard" value={editedBusiness.description} onChange={handleChange} />
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>

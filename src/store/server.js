@@ -59,7 +59,6 @@ export async function GetDetails() {
     const details = await axios.get('http://localhost:8787/businessData');
     console.log("Details from server:", details.data); // נוסיף שורה זו
     businessStore.editDetails(details.data);
-    // businessStore.editDetails(details);
 }
 
 export async function EditDetails(details) {

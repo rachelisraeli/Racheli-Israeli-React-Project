@@ -22,6 +22,8 @@ const AddMeeting = observer((props) => {
     const [meeting, setMeeting] = useState({});
     const [typeService, setTypeService] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
+    // const [click, setClick] = useState(false);
+    const [openAlert, setOpenAlert] = useState(false);
 
     const handleChange = (event) => {
         setTypeService(event.target.value);
@@ -44,15 +46,17 @@ const AddMeeting = observer((props) => {
 
     const handleClose = () => {
         props.setOpen(false);
-        props.setOpenAlert(false);
     };
 
     const handleUpdate = () => {
         addMeeting(meeting).then(x => {
             setMeeting({});
             handleClose();
+            dataStore.isAddMeeting = true;//========
+            setClick(true);
         }).catch(() => {
             setIsFormValid(false);
+            dataStore.isAddMeeting = false;//=======
         });
     };
 
@@ -65,8 +69,6 @@ const AddMeeting = observer((props) => {
                         <FormControl required sx={{ m: 1, minWidth: 224 }}>
                             <InputLabel id="demo-simple-select-required-label">Type Of Service</InputLabel>
                             <Select
-                                // labelId="demo-simple-select-required-label"
-                                // id="demo-simple-select-required-label"
                                 id="typeService" value={typeService} label="Type Of Service*" onChange={handleChange}
                             >
                                 {dataStore.services.map((service, index) => (
@@ -91,11 +93,23 @@ const AddMeeting = observer((props) => {
                             />
                         </LocalizationProvider>
                     </DialogContent>
-                    {dataStore.isAddMeeting ?
+                    {/* {dataStore.isAddMeeting && click &&
+                        alert("The meeting added successfully! See you :) ")}
+                    {!dataStore.isAddMeeting && click &&
+                        alert("It is not possible to make an appointment at this time, Please choose other time")} */}
+
+                    {/* {click && !dataStore.isAddMeeting && <Alert severity="error" onClose={() => { setClick(false) }}>לא ניתן לקבוע פגישה במועד זה. ניתן לנסות במועד אחר</Alert>}
+                    {click && dataStore.isAddMeeting && <Alert severity="success" onClose={() => { setClick(false) }}>הפגישה נקבעה בהצלחה</Alert>} */}
+
+                    {dataStore.isAddMeeting && openAlert ?
                         alert("The meeting added successfully! See you :) ") :
                         alert("It is not possible to make an appointment at this time, Please choose other time")}
-                    {/* {props.openAlert && !props.failed &&
-                        <Alert severity="error" > It is not possible to make an appointment at this time.<br /> You can try at another time </Alert>} */}
+
+                    {/* {dataStore.isAddMeeting &&
+                        <Alert severity="success" onClose={() => dataStore.isAddMeeting = false}> The meeting added successfully! &nbsp;&nbsp;&nbsp; See you :) </Alert>}
+                    {!dataStore.isAddMeeting &&
+                        <Alert severity='error' onClose={() => dataStore.isAddMeeting = false}>It is not possible to make an appointment at this time, Please choose other time</Alert>} */}
+                        
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
                         <Button onClick={handleUpdate} disabled={!isFormValid}>Add</Button>

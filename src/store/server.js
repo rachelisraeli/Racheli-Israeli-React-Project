@@ -28,9 +28,11 @@ export async function addMeeting(meeting) {
     const res = await axios.post('http://localhost:8787/appointment', meeting);
     if (res.status === 200) {
         dataStore.addMeeting(meeting);
+        // alert("The meeting added successfully! See you :)");
         return 'success';
     }
     else {
+        // alert("It is not possible to make an appointment at this time, Please choose other time");
         return 'failed';
     }
 }

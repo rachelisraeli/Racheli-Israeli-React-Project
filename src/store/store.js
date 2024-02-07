@@ -21,6 +21,7 @@ class DataStore {
             business: observable,
             editedBusiness: action,
             isAddMeeting: observable,
+            setIsAddMeeting: action,
         })
     }
 
@@ -45,9 +46,12 @@ class DataStore {
     }
 
     addMeeting = (meeting) => {
-        console.log("addMeeting", meeting);
         this.meetings = [...this.meetings, meeting];
         this.isAddMeeting = true;
+    }
+
+    setIsAddMeeting(status) {
+        this.isAddMeeting = status;
     }
 
     editedBusiness = (business) => {

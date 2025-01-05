@@ -40,12 +40,12 @@ This project is a React-based web application designed for professionals to mana
 
 4. Start the React application:
    ```bash
-   npm start
+   npm run dev
    ```
 
 5. Ensure the backend server is running by navigating to the server project and running:
    ```bash
-   node server.js
+   npm start
    ```
 
 ## How to Use
@@ -59,12 +59,6 @@ This project is a React-based web application designed for professionals to mana
    - Log in to view all appointments.
    - See appointments sorted by time and color-coded for better time management.
 
-## Project Structure
-
-- **src/components**: Contains React components for different parts of the application.
-- **src/store**: MobX store for managing the global state.
-- **src/styles**: Styling files using MUI.
-
 ## Dependencies
 
 - React
@@ -76,11 +70,7 @@ This project is a React-based web application designed for professionals to mana
 - The backend server is critical for the app to function. Make sure to set it up and run it before using the app.
 - For more details about the backend server, refer to its documentation in the corresponding Node.js project.
 
-## License
-
-This project is licensed under the MIT License. Feel free to use and modify it as needed.
-
 ## Contact
 
-For any questions or suggestions, please contact the project owner.
+For any questions or suggestions, please contact r0504172638@gmail.com
 

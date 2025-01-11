@@ -1,0 +1,19 @@
+.service-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: start;
+}
+
+.card {
+    border: 1px solid #f0f0f0;
+    border-radius: 30px;
+    margin: 20px;
+    padding: 5px;
+    box-shadow: 0 0 10px #f0f0f0;
+    transition: 0.3s;
+}
+
+.deleteButton {
+    margin-top: 15px;
+}

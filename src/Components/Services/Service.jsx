@@ -14,7 +14,7 @@ const Service = (observer(() => {
 
     return (
         <>
-            < Button variant="contained" onClick={handleClickOpen} > Add Service </Button >
+            <Button variant="contained" onClick={handleClickOpen} > Add Service </Button >
             <AddService buttonOpen={buttonOpen} setButtonOpen={setButtonOpen} />
         </>
     )

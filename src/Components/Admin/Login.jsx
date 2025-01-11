@@ -7,6 +7,7 @@ import AdminHome from "./AdminHome";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../Color/Color.jsx';
 import dataStore from '../../store/store.js';
+import "./Admin.css";
 
 const Login = observer(() => {
 
@@ -29,24 +30,28 @@ const Login = observer(() => {
 
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <TextField
-                    type="text"
-                    id="name"
-                    label="User Name"
-                    value={userName}
-                    onChange={handleUserNameChange}
-                /> <br /> <br />
-                <TextField
-                    type="password"
-                    id="password"
-                    label="Password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                /> <br /> <br />
-                <Button variant="contained" onClick={handleLoginClick}>to login</Button>
-                {dataStore.isLogin ? <AdminHome /> : null}
-            </ThemeProvider>
+            <div className="container">
+                <ThemeProvider theme={theme}>
+                    <TextField
+                        type="text"
+                        id="name"
+                        label="User Name"
+                        value={userName}
+                        onChange={handleUserNameChange}
+                        className="button"
+                    />
+                    <TextField
+                        type="password"
+                        id="password"
+                        label="Password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        className="button"
+                    />
+                    <Button className="button" variant="contained" onClick={handleLoginClick}>to login</Button>
+                    {dataStore.isLogin ? <AdminHome /> : null}
+                </ThemeProvider>
+            </div>
         </>
     );
 });

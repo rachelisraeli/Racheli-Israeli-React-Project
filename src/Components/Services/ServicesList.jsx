@@ -6,11 +6,11 @@ import Service from './Service.jsx';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { getServices } from '../../store/server.js';
+import { deleteService, getServices } from '../../store/server.js';
+import { Button } from '@mui/material';
+import './Service.css';
 
 const ServiceList = (observer(({ isAdmin }) => {
-
-    console.log(isAdmin)
 
     useEffect(() => {
         if (!dataStore.services.length) {
@@ -20,29 +20,26 @@ const ServiceList = (observer(({ isAdmin }) => {
 
     return (
         <>
-            <br />
-            <br />
-            <br />
-            {console.log(dataStore.services)}
-            {dataStore.services.map((service, index) => {
-                return <><Card key={index} sx={{ maxWidth: 500 }}>
-                    <CardContent>
-                        <Typography variant="h5" component="div">
-                            Type of service:  {service.name}
-                        </Typography>
-                        <br />
-                        <Typography variant="h6">
-                            {service.description} <br />
-                        </Typography>
-                        <br />
-                        <Typography variant="h6">
-                            Price:  {service.price} <br />
-                        </Typography>
-                        {isAdmin ? null : <><br /> <br /><Meeting /></>}
-                    </CardContent>
-                </Card>
-                </>
-            })}
+            <div className='service-container'>
+                {dataStore.services.map((service, index) => {
+                    return <><Card key={index} sx={{ maxWidth: 500 }} className='card'>
+                        <CardContent>
+                            <Typography variant="h5" component="div">
+                                {service.name}
+                            </Typography>
+                            <Typography variant="h6">
+                                {service.description} <br />
+                            </Typography>
+                            <Typography variant="h6">
+                                Price:  {service.price} <br />
+                            </Typography>
+                            {isAdmin ? null : <Meeting />}
+                            {isAdmin ? <Button className='deleteButton' variant="contained" color="error" onClick={() => deleteService(service.id)}>Delete</Button> : null}
+                        </CardContent>
+                    </Card >
+                    </>
+                })}
+            </div>
             {isAdmin ? <Service /> : null}
         </>
     )

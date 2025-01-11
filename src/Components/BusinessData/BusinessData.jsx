@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import EditBusinessData from './EditBusinessData';
 import { GetDetails } from '../../store/server';
 import businessStore from '../../store/BusinessStore.js';
+import "./BusinessData.css";
 
 const BusinessData = (observer(({ isAdmin }) => {
 
@@ -16,7 +17,6 @@ const BusinessData = (observer(({ isAdmin }) => {
     });
 
     const handleUpdateBusiness = (editedBusiness) => {
-        console.log("BusinessData", editedBusiness)
         setBusiness(editedBusiness);
     };
 
@@ -30,10 +30,9 @@ const BusinessData = (observer(({ isAdmin }) => {
 
     return (
         <>
-            {isAdmin && <EditBusinessData business={business} handleUpdateBusiness={handleUpdateBusiness} updateBusinessDetailsInView={updateBusinessDetailsInView} />}
-            <br />
-            <div>
-                <h1>{businessStore.details.name}</h1>
+            {isAdmin && <EditBusinessData className='editButton' business={business} handleUpdateBusiness={handleUpdateBusiness} updateBusinessDetailsInView={updateBusinessDetailsInView} />}
+            <div className='container'>
+                <p className='title'>{businessStore.details.name}</p>
                 <p><strong>Address:</strong> {businessStore.details.address}</p>
                 <p><strong>Phone:</strong> {businessStore.details.phone}</p>
                 <p><strong>Owner:</strong> {businessStore.details.owner}</p>

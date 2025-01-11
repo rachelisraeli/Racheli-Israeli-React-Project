@@ -18,6 +18,17 @@ export async function addService(service) {
     }
 }
 
+export async function deleteService(serviceId) {
+    const res = await axios.delete(`http://localhost:8787/service/${serviceId}`);
+    if (res.status === 200) {
+        dataStore.deleteService(serviceId);
+        return 'success';
+    }
+    else {
+        return 'failed';
+    }
+}
+
 export async function getMeetings() {
     const meetings = await axios.get('http://localhost:8787/appointments');
     dataStore.setMeetings(meetings.data);

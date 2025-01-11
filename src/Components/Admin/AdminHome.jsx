@@ -3,24 +3,20 @@ import { Button, colors } from '@mui/material'
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import BusinessData from '../BusinessData/BusinessData';
+import "./Admin.css";
 
 function AdminHome() {
 
     return (
         <div>
 
-            <BusinessData isAdmin={true} />
+            <BusinessData isAdmin={true} className='businessData' />
 
-            <br />
-            <br />
-
-            {<Button variant="contained">
+            {<Button variant="contained" className='button'>
                 <Link to="./meetings">Meetings</Link>
             </Button>}
 
-            &nbsp;&nbsp;&nbsp;&nbsp;
-
-            {<Button variant="contained">
+            {<Button variant="contained" className='button'>
                 <Link to="./services">Services</Link>
             </Button>}
 

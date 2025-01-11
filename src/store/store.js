@@ -22,6 +22,7 @@ class DataStore {
             editedBusiness: action,
             isAddMeeting: observable,
             setIsAddMeeting: action,
+            deleteService: action,
         })
     }
 
@@ -38,6 +39,10 @@ class DataStore {
 
     addService = (service) => {
         this.services = [...this.services, service];
+    }
+
+    deleteService = (id) => {
+        this.services = this.services.filter(service => service.id !== id);
     }
 
     setMeetings = (meetings) => {
